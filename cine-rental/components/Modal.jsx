@@ -1,19 +1,29 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Modal = ({ children }) => {
-    const modalRef = useRef(null);
     const router = useRouter();
+    const modalRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        if (!modalRef.current?.open) {
-            modalRef.current?.showModal();
-        }
-    }, [])
+  useEffect(() => {
+    setMounted(true); // Marking the component as mounted
+
+    return () => {
+      setMounted(false); // Marking the component as unmounted
+    };
+  }, []);
+
+  useEffect(() => {
+    if (mounted && modalRef.current && !modalRef.current.open) {
+      modalRef.current.showModal();
+    }
+  }, [mounted]);
+
 
     function onHide() {
         router.back();
@@ -23,15 +33,18 @@ const Modal = ({ children }) => {
         <dialog
             ref={modalRef}
             onClose={onHide}
-            className="shadow-[#00D991] shadow-md border border-[#00D991] flex flex-col p-2 rounded-md"
+            className="shadow-rose-500 shadow-md border border-rose-400 flex flex-col p-2 rounded-md"
         >
             <span
                 onClick={onHide}
                 className="flex justify-end cursor-pointer"
             >
-                <p>
-                    <Image src={'/xmark.svg'} height={30} width={30} alt="close" />
-                </p>
+                <Image
+                    src={'/xmark.svg'}
+                    width={30}
+                    height={30}
+                    alt="close"
+                />
             </span>
             {children}
         </dialog>,
