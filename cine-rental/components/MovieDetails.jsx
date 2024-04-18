@@ -1,18 +1,20 @@
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import Sidebar from "@/components/Sidebar";
 import Movies from "@/db/data.json";
 import Image from "next/image";
 import { notFound } from 'next/navigation'
 
-const MovieDetails = ({ id }) => {
-    const movieId = id.id;
+const MovieDetails = async ({ id, lang }) => {
+    const movieId = id;
     const movie = Movies?.results.find((movie) => movie.id === Number(movieId));
-    if(!movie){
+    if (!movie) {
         notFound();
     }
+    const dict = await getDictionary(lang);
 
     return (
         <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-            <Sidebar />
+            <Sidebar lang={lang} />
             <section>
                 <div>
                     <Image
@@ -34,10 +36,10 @@ const MovieDetails = ({ id }) => {
                         </h2>
                         <p className="my-2 text-slate-400 italic">{movie?.overview}</p>
                         <ul className="text-slate-300 space-y-2 my-8">
-                            <li>Release Date : {movie?.release_date}</li>
-                            <li>Average Vote : {movie?.vote_average}</li>
-                            <li>Vote Count : {movie?.vote_count}</li>
-                            <li>Popularity : {movie?.popularity}</li>
+                            <li>{dict.Release_Date} : {movie?.release_date}</li>
+                            <li>{dict.Average_Vote} : {movie?.vote_average}</li>
+                            <li>{dict.Vote_Count} : {movie?.vote_count}</li>
+                            <li>{dict.Popularity}: {movie?.popularity}</li>
                         </ul>
                     </div>
                     <div className="col-span-2 space-y-4">

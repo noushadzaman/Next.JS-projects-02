@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Modal = ({ children }) => {
     const modalRef = useRef(null);
@@ -28,7 +29,9 @@ const Modal = ({ children }) => {
                 onClick={onHide}
                 className="flex justify-end cursor-pointer"
             >
-                <p>X</p>
+                <p>
+                    <Image src={'/xmark.svg'} height={30} width={30} alt="close" />
+                </p>
             </span>
             {children}
         </dialog>,
