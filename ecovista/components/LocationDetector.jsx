@@ -1,13 +1,14 @@
-"use client"
 
-import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+'use client'
+import { useState, useEffect } from 'react';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const LocationDetector = () => {
     const [loading, setLoading] = useState(false);
+
     const searchParams = useSearchParams();
-    const pathname = usePathname();
+    const pathName = usePathname();
     const router = useRouter();
 
     useEffect(() => {
@@ -16,32 +17,32 @@ const LocationDetector = () => {
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                params.set("latitude", position.coords.latitude);
-                params.set("longitude", position.coords.longitude);
+                params.set('latitude', position.coords.latitude);
+                params.set('longitude', position.coords.longitude);
                 setLoading(false);
-                router.push(`/current?${params.toString()}`)
+                router.push(`/current?${params.toString()}`);
             })
         }
 
-    }, [pathname, searchParams]);
+    }, [pathName, searchParams]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-slate-700 text-white">
+        <div className="flex flex-col justify-center items-center h-screen bg-slate-700 text-white">
             {
-                loading &&
-                <>
-                    <Image
-                        className="border my-4 rounded-md"
-                        src="/network.gif"
-                        width={500}
-                        height={500}
-                        alt="...loading"
-                    />
-                    <p className="text-4xl text-center">Detecting location</p>
-                </>
+                loading && (
+                    <>
+                        <Image
+                            src="/network.gif"
+                            alt="Loading..."
+                            height={500}
+                            width={500}
+                            className="border rounded-md my-4" />
+                        <p className="text-4xl text-center">Detecting Location...</p>
+                    </>
+                )
             }
         </div>
-    );
-};
+    )
+}
 
-export default LocationDetector;
+export default LocationDetector
