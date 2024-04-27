@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.12",
+<<<<<<< HEAD
     "mongoose": "^8.3.2",
+=======
+>>>>>>> 8cca44e263f893e86199b6f188d5b0ef614e2b64
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18"

@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 const EventMenu = ({ location }) => {
+=======
+const EventMenu = () => {
+>>>>>>> 8cca44e263f893e86199b6f188d5b0ef614e2b64
     return (
         <div className="overflow-hidden rounded-lg col-span-2 bg-[#242526]">
             <div className="w-full">
@@ -13,7 +17,11 @@ const EventMenu = ({ location }) => {
                     referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div className="p-4">
+<<<<<<< HEAD
                 <p className="text-[#9C9C9C] text-base mt-1">{location}</p>
+=======
+                <p className="text-[#9C9C9C] text-base mt-1">Rangpur, Dhaka, Bangladesh, Rangpur, Bangladesh</p>
+>>>>>>> 8cca44e263f893e86199b6f188d5b0ef614e2b64
             </div>
         </div>
     );
