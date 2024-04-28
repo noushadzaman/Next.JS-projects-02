@@ -11,9 +11,8 @@ const EventList = async ({ query }) => {
           <EventCard key={event?.id} event={event} />
         ))
       }
-
     </div>
   )
-}
+};
 
-export default EventList
+export default EventList;
