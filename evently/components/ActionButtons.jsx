@@ -10,17 +10,18 @@ const ActionButtons = ({ eventId, interestedUserIds, fromDetails, goingUserIds }
   const { auth, setAuth } = useAuth();
   const router = useRouter();
   const isInterested = interestedUserIds.find(id => id === auth?.id);
+  console.log(interestedUserIds)
+  console.log(auth?.id)
   const [interested, setInterested] = useState(isInterested);
-  const isGoing = goingUserIds.find(id => id === auth?.id);
+  const isGoing = goingUserIds.find(id => id === auth?.id);  
   const [going, setGoing] = useState(isGoing);
-  console.log(going);
   const [isPending, startTransition] = useTransition();
 
   async function toggleInterest() {
     if (auth) {
       await addInterestedEvent(eventId, auth?.id);
       setInterested(!isInterested);
-    }
+    }    
     else {
       router.push('/login');
     }
